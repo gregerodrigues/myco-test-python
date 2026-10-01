@@ -1,0 +1,28 @@
+name: Myco PR Review
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  myco-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: MycoIntelligence/myco-bundled-action@v1
+        with:
+          pr_link: ${{ github.event.pull_request.html_url }}
+          api_key: ${{ secrets.MYCO_LLM_API_KEY }}
+          metrics_endpoint: ${{ vars.MYCO_METRICS_ENDPOINT }}
+          metrics_api_key: ${{ secrets.MYCO_METRICS_API_KEY }}
+          client_id: ${{ vars.MYCO_CLIENT_ID }}
+
+          # Optional review configuration:
+          # min_severity: ${{ vars.MYCO_MIN_SEVERITY }}
+          # validate_findings: ${{ vars.MYCO_VALIDATE_FINDINGS }}
+          # post_github_comments: ${{ vars.MYCO_POST_COMMENTS }}
+          # ci_gate: ${{ vars.MYCO_CI_GATE }}
