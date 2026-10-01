@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "myco-test-python"
+version = "0.1.0"
+description = "A minimal example Python package"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.scripts]
+myco-greet = "myco_test_python.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
